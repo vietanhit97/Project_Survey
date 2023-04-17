@@ -22,10 +22,10 @@ public interface SurveyRepository extends JpaRepository<Survey, Integer>, Paging
     Page<Survey> findAll(Specification<Survey> spec, Pageable pageable);
 
 
-    @Query("SELECT COUNT(su) FROM SurveyUser su WHERE su.SurveyId.id = :surveyId")
+    @Query("SELECT COUNT(su.UserId) FROM SurveyUser su WHERE su.SurveyId.id = :surveyId")
     Integer countParticipantsBySurvey(@Param("surveyId") Integer surveyId);
 
-    @Query("SELECT COUNT(ans) FROM AnswerSurvey ans WHERE ans.surveyId.id = :surveyId")
+    @Query("SELECT COUNT(ans.userId) FROM AnswerSurvey ans WHERE ans.surveyId.id = :surveyId")
     Integer countAnswersBySurvey(@Param("surveyId") Integer surveyId);
 
 

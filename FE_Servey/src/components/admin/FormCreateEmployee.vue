@@ -140,7 +140,7 @@ export default {
     },
   }),
   mounted() {
-    axios.get('http://localhost:8081/employee/roles-department', {
+    axios.get('http://192.168.120.180:8081/employee/roles-department', {
       headers: {
         'Authorization': 'Bearer ' + sessionStorage.getItem('token')
       }
@@ -175,13 +175,13 @@ export default {
         passwordAccount: this.employee.password,
         eSex: this.employee.sex
       };
-      axios.post('http://localhost:8081/employee/create-employee', newEmployee, {
+      axios.post('http://192.168.120.180:8081/employee/create-employee', newEmployee, {
         headers: {
           'Authorization': 'Bearer ' + sessionStorage.getItem('token')
         }
       })
         .then(() => {
-          alert('Employee added successfully!');
+          alert('Thêm nhân viên thành công !');
           // Reset the form
           this.employee.email = '';
           this.employee.username = '';

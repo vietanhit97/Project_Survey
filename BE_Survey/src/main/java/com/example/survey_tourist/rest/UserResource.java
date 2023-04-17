@@ -1,35 +1,22 @@
 package com.example.survey_tourist.rest;
 
-import com.example.survey_tourist.dto.JwtRequest;
+
 import com.example.survey_tourist.dto.UserDto;
 import com.example.survey_tourist.entity.User;
-//import com.example.survey_tourist.service.AuthService;
-import com.example.survey_tourist.repository.UserRepository;
 import com.example.survey_tourist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
 
-    private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
     @GetMapping
     public ResponseEntity<List<UserDto>> findAllUsers(){
         return ResponseEntity.ok(userService.findAll());
@@ -39,11 +26,6 @@ public class UserResource {
     public ResponseEntity<User> getUser(@PathVariable final String  id){
         return ResponseEntity.ok(userService.get(id));
     }
-
-//    @GetMapping("/me")
-//    public ResponseEntity<User> me(){
-//        return ResponseEntity.ok(authService.getCurrentUser());
-//    }
 
     @PostMapping
     public ResponseEntity<Integer> createUser(@RequestBody @Valid final UserDto userDto) {

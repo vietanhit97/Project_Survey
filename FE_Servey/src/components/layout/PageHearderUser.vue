@@ -21,41 +21,17 @@
                 </nav>
             </div>
             <div class="col-sm-4 ">
-                <div class="dropdown bg-none ">
-                    <button class="btn btn-secondary dropdown-toggle border-0 float-right"
-                        style="background:none;float:right" type="button" id="triggerId" data-bs-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fa-solid fa-user fa-2x"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="triggerId">
-                        <a class="dropdown-item" href="#">Thông Tin</a>
-                        <button class="dropdown-item" @click="loguot()">Đăng xuất</button>
-
-                    </div>
-                </div>
+                <LogOut/>
             </div>
         </div>
     </header>
 </template>
 <script>
-import axios from 'axios';
+import LogOut from './LogOut.vue'
 export default {
     name: 'PageHearderUser',
-    methods: {
-        loguot() {
-            axios.get('http://localhost:8081/logout', {
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-                }
-            })
-                .then(response => {
-                    console.log(response); // in ra thông báo đăng xuất thành công
-                    // Thực hiện các hành động khác sau khi đăng xuất, ví dụ: điều hướng đến trang chủ
-                })
-                .catch(error => {
-                    console.error(error); // in ra lỗi nếu có
-                });
-        }
+    components:{
+        LogOut
     }
 }
 </script>

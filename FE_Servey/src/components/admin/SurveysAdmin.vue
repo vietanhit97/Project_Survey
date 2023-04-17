@@ -94,7 +94,7 @@ export default {
     },
     methods: {
         searchSurveys(pageNumber = 1) {
-            axios.get('http://localhost:8081/getSurveys', {
+            axios.get('http://192.168.120.180:8081/getSurveys', {
                 params: {
                     nameSurvey: this.searchName,
                     startDate: this.searchStartDate,
@@ -123,7 +123,7 @@ export default {
         async deleteSurvey(surveyId) {
             try {
                 // Gọi API DELETE với surveyId được truyền vào
-                await axios.delete(`http://localhost:8081/survey/${surveyId}`, {
+                await axios.delete(`http://192.168.120.180:8081/survey/${surveyId}`, {
                     headers: {
                         'Authorization': 'Bearer ' + sessionStorage.getItem('token')
                     }

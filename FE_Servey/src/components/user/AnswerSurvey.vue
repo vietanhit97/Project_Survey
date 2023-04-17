@@ -60,27 +60,25 @@ export default {
             options: [],
             textInput: {},
             optionInput: {},
-            optionInputChechbox: {}
+            optionInputChechbox: {},
         }
     }, mounted() {
-        axios.get(`http://localhost:8081/survey-user/${this.$route.params.id}`, {
-            headers: {
-                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-            }
-        })
-            .then(response => {
-                this.survey = response.data;
-                console.log(this.survey);
+            axios.get(`http://192.168.120.180:8081/survey-user/${this.$route.params.id}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+                }
             })
-            .catch(error => {
-                console.log(error);
-            });
+                .then(response => {
+                    this.survey = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
     }, methods: {
         submitSurvey() {
             const answerSurveys = [];
             const user = JSON.parse(sessionStorage.getItem('user'));
             const idUser = user.id;
-            console.log(idUser);
             for (let question of this.survey.questionSurveys) {
                 if (question.questionType.id === 1) {
                     const answer = {
@@ -121,7 +119,7 @@ export default {
             }
             const requests = [];
             if (answerSurveys.length > 0) {
-                const answerSurveysRequest = axios.post('http://localhost:8081/answer-survey/answer-surveys', answerSurveys, {
+                const answerSurveysRequest = axios.post('http://192.168.120.180:8081/answer-survey/answer-surveys', answerSurveys, {
                     headers: {
                         'Authorization': 'Bearer ' + sessionStorage.getItem('token')
                     }

@@ -134,8 +134,6 @@ public class EmployeeService {
         user.setESex(employeeDto.getESex());
         user.setEmail(employeeDto.getEmail());
         user.setDepartment(departmentRepository.findById(employeeDto.getDepartmentId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
-        String encryptedPassword = passwordEncoder.encode(employeeDto.getPasswordAccount());
-        user.setPasswordAccount(encryptedPassword);
         LocalDate updateAt = LocalDate.now() ;
         user.setUpdateAt(updateAt);
         employeeRepository.save(user);

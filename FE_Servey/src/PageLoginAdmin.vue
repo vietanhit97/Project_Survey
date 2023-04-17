@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <PageHearder />
+        <PageHearderLogin />
         <div class="d-flex align-items-center justify-content-center " style="height: 60vh;">
             <div class="bg-cl">
                 <form @submit.prevent="login">
@@ -14,7 +14,6 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-center bg-cl">
                         <button class="btn btn-primary me-2" type="submit">Đăng nhập</button>
-                        <router-link to="register-admin" class="btn btn-success">Đăng ký</router-link>
                     </div>
                 </form>
             </div>
@@ -25,13 +24,13 @@
 
 <script>
 import qs from 'qs';
-import PageHearder from './components/layout/PageHearder.vue'
+import PageHearderLogin from './components/layout/PageHearderLogin.vue'
 import PageFooter from './components/layout/PageFooter.vue'
 import axios from 'axios';
 export default {
     name: 'PageExternalUsers',
     components: {
-        PageHearder, PageFooter
+        PageHearderLogin, PageFooter
     },
     data() {
         return {
@@ -53,7 +52,7 @@ export default {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             };
-            axios.get('http://localhost:8081/users/user-info', {
+            axios.get('http://192.168.120.180:8081/users/user-info', {
                 params: {
                     userName: this.jwt.username.trim(),
                 }
@@ -65,7 +64,7 @@ export default {
                 .catch(error => {
                     console.log('Failed to get user data: ' + error);
                 });
-            axios.post('http://localhost:8081/auth/login',data, config)
+            axios.post('http://192.168.120.180:8081/auth/login',data, config)
                 .then(response => {
                     const token = response.data.access_token;
                     sessionStorage.setItem('token', token);
@@ -78,9 +77,9 @@ export default {
                         this.$router.push({ name: 'surveys-user' });
                     }
                 })
-                .catch(error => {
-                    alert('Đăng nhập thất bại' + error);
-                });
+                .catch(
+                    // alert('Đăng nhập thất bại')
+                );
         }
     }
 }

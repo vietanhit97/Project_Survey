@@ -119,7 +119,7 @@ export default {
     mounted() {
         this.searchEmployees(),
             // Gọi API "/departments" bằng Axios khi component được mounted
-            axios.get('http://localhost:8081/employee/roles-department', {
+            axios.get('http://192.168.120.180:8081/employee/roles-department', {
                 headers: {
                     'Authorization': 'Bearer ' + sessionStorage.getItem('token')
                 }
@@ -167,7 +167,7 @@ export default {
         async deleteEmployee(employeeId) {
             try {
                 // Gọi API DELETE với employeeId được truyền vào
-                await axios.delete(`http://localhost:8081/employee/${employeeId}`, {
+                await axios.delete(`http://192.168.120.180:8081/employee/${employeeId}`, {
                     headers: {
                         'Authorization': 'Bearer ' + sessionStorage.getItem('token')
                     }

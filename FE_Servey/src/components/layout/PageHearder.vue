@@ -12,19 +12,16 @@
                         <div class="collapse navbar-collapse " id="collapsibleNavId">
                             <ul class="navbar-nav mx-auto mt-2 mt-lg-0 ">
                                 <li class="nav-item ">
-                                    <router-link to="/surveys-admin" exact class="nav-link"
+                                    <router-link to="/surveys-admin" :key="$route.fullPath" exact class="nav-link"
                                         :class="{ 'active': $route.path === '/surveys-admin' }">
                                         Khảo sát
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/list-employee" exact class="nav-link"
+                                    <router-link to="/list-employee" :key="$route.fullPath" exact class="nav-link"
                                         :class="{ 'active': $route.path === '/list-employee' }">
                                         Thành Viên
                                     </router-link>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Ban quản lý</a>
                                 </li>
                             </ul>
                         </div>
@@ -32,24 +29,18 @@
                 </nav>
             </div>
             <div class="col-sm-4 ">
-                <div class="dropdown bg-none ">
-                    <button class="btn btn-secondary dropdown-toggle border-0 float-right"
-                        style="background:none;float:right" type="button" id="triggerId" data-bs-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fa-solid fa-user fa-2x"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="triggerId">
-                        <a class="dropdown-item" href="#">Thông tin</a>
-                        <a class="dropdown-item" href="#">Đăng xuất</a>
-                    </div>
-                </div>
+                <LogOut/>
             </div>
         </div>
     </header>
 </template>
 <script>
+import LogOut from './LogOut.vue'
 export default {
-    name: 'PageHearder'
+    name: 'PageHearder',
+    components:{
+        LogOut
+    }
 }
 </script>
 <style>

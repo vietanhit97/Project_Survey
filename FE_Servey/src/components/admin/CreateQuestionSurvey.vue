@@ -100,7 +100,7 @@ export default {
     name: "CreateQuestionText",
     data() {
         return {
-            currentQuestion: true, // Ban đầu đang tạo câu hỏi đầu tiên
+            currentQuestion: true,
             types: [],
             CreateSurveyDto: {
                 nameSurveyCreateSurvey: "",
@@ -121,7 +121,7 @@ export default {
     },
     mounted() {
         axios
-            .get("http://localhost:8081/question-type/types", {
+            .get("http://192.168.120.180:8081/question-type/types", {
                 headers: {
                     Authorization: "Bearer " + sessionStorage.getItem("token")
                 }
@@ -159,14 +159,14 @@ export default {
                 }
                 newCreateSurveyDto.questions.push(newQuestion);
             }
-            axios.post("http://localhost:8081/createSurvey/surveys", newCreateSurveyDto, {
+            axios.post("http://192.168.120.180:8081/createSurvey/surveys", newCreateSurveyDto, {
                 headers: {
                     'Authorization': 'Bearer ' + sessionStorage.getItem('token')
                 }
             }
             )
                 .then(() => {
-                    alert()
+                    alert("Tạo khảo sát thành công !")
                     this.$router.push({ name: "surveys-admin" });
                 })
                 .catch(error => {
