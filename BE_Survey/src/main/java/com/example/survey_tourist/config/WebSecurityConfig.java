@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -35,7 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         AppConfig appConfig = new AppConfig();// tao ra doi tuong passwordEncoder
-
         auth.userDetailsService(userDetailsService).passwordEncoder(appConfig.passwordEncoder());
     }
 
@@ -48,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable();
         httpSecurity.sessionManagement().sessionCreationPolicy(STATELESS);
         httpSecurity.authorizeRequests().antMatchers("/auth/login", "/auth/register","/role/**","/getSurveyUsers/**","/survey-user/**","/answer-survey/**" ,"/users/**","/auth/logout").permitAll();
-        httpSecurity.authorizeRequests().antMatchers("/question-type/**","/createSurvey/**","/surveys/**","/survey/**","/getSurveys","/question-survey/**","/questionType/**","/roles/**","/department/**","/option-question-survey/**","/employee/**").hasAnyAuthority("ROLE_ADMIN");
+        httpSecurity.authorizeRequests().antMatchers("/question-type/**","/surveys/**","/survey/**","/getSurveys","/question-survey/**","/questionType/**","/roles/**","/department/**","/createSurvey/**","/option-question-survey/**","/employee/**").hasAnyAuthority("ROLE_ADMIN");
         httpSecurity.authorizeRequests().antMatchers().hasAnyAuthority("ROLE_USER");
         httpSecurity.authorizeRequests().anyRequest().authenticated();
         httpSecurity.addFilter(customAuthenticationFilter);

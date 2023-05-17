@@ -25,7 +25,7 @@ public class QuestionSurvey implements Serializable{
     private int id;
 
 
-    @Column(name = "name_Question",nullable = false)
+    @Column(name = "name_Question",nullable = false,length = 255)
     private String nameQuestion;
 
 

@@ -10,6 +10,7 @@ import com.example.survey_tourist.service.QuestionTypeService;
 import com.example.survey_tourist.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class CreateSurveyByAdminResource {
     @Autowired
     private OptionQuestionSurveyRepository optionQuestionSurveyRepository;
     @PostMapping("/surveys")
+    @Transactional
     public ResponseEntity<Survey> createSurvey(@RequestBody SurveyDto surveyDto) {
         Survey survey = new Survey();
         survey.setNameSurvey(surveyDto.getNameSurvey());
@@ -42,9 +44,7 @@ public class CreateSurveyByAdminResource {
                 OptionQuestionSurvey option = new OptionQuestionSurvey();
                 option.setNameOption(optionDto.getNameOption());
                 option.setQuestionSurvey(question);
-                System.out.println(question);
                 optionQuestionSurveyRepository.save(option);
-                System.out.println(optionDto.getNameOption());
             }
         }
         return ResponseEntity.ok(survey);
